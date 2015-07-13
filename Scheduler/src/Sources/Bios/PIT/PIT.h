@@ -29,7 +29,7 @@
 *****************************************************************************************************/
 
 /* PIT_Callback[], function to be called upon event trigger on PIT channels */
-extern tCallbackFunction PIT_Callback[8];
+extern tCallbackFunction PIT_Callback[8] ;
 	
 
 /*****************************************************************************************************

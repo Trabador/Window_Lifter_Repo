@@ -33,7 +33,7 @@ extern "C" {
 #endif
 
 extern __asm void __start();
-__asm void usr_init();
+__asm void usr_init_debug();
 /*lint -esym(752,__start) */
 
 #ifdef __cplusplus
@@ -44,7 +44,7 @@ __asm void usr_init();
 /* usr_init():                                                   */
 /*   Define here the needed hardware initializations at startup  */
 
-__asm void usr_init()
+__asm void usr_init_debug()
 {
     /* Add needed hardware initializations in this function */
 

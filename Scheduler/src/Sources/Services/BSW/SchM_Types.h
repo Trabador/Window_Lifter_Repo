@@ -2,7 +2,7 @@
 #define __SCHEDULER_TYPES_H
 	#include "typedefs.h"
 	typedef void (*TaskFuntionPtrType)(void);
-	typedef u8 SchedulerTaskOffsetType;
+	typedef uint8_t SchedulerTaskOffsetType;
 	
 	typedef enum{
 		MASK_3P125MS =	3,
@@ -42,7 +42,7 @@
 	}SchedulerTaskTableType;
 	
 	typedef struct{
-		u8 SchedulerNumberOfTask;
+		uint8_t SchedulerNumberOfTask;
 		const SchedulerTaskTableType *SchedulerTaskTable;
 	}SchedulerConfigType;
 	
@@ -55,7 +55,7 @@
 	}SchedulerStateType;
 	
 	typedef struct{
-		u8 SchedulerCounter;
+		uint8_t SchedulerCounter;
 		SchedulerTaskIDType SchedulerTaskRunning;
 		SchedulerStateType SchedulerStatus;
 	}SchedulerControlType;
