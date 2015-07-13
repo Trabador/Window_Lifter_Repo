@@ -31,6 +31,33 @@
 	
 	typedef struct{
 		SchedulerTaskStateType SchedulerTaskState;
-		TaskFuntionPtrType TaskFunctionControlPtr;
-		
-	}
+		TaskFuntionPtrType TaskFunctionControlPtr; /*TaskControl -> TCB */
+	}SchedulerTaskControlType;
+	
+	typedef struct{
+		SchedulerTaskOffsetType SchedulerTaskOffset;
+		SchedulerTaskMaskType SchedulerTaskMask;
+		SchedulerTaskIDType SchedulerTaskId;
+		TaskFuntionPtrType TaskFunctionPtr;
+	}SchedulerTaskTableType;
+	
+	typedef struct{
+		u8 SchedulerNumberOfTask;
+		const SchedulerTaskTableType *SchedulerTaskTable;
+	}SchedulerConfigType;
+	
+	typedef enum{
+		SCHEDULER_UNINIT,
+		SCHEDULER_INIT,
+		SCHEDULER_RUNNING,
+		SCHEDULER_OVERLOAD,
+		SCHEDULER_HALTED
+	}SchedulerStateType;
+	
+	typedef struct{
+		u8 SchedulerCounter;
+		SchedulerTaskIDType SchedulerTaskRunning;
+		SchedulerStateType SchedulerStatus;
+	}SchedulerControlType;
+#endif
+
