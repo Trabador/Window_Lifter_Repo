@@ -1,3 +1,4 @@
+#include "SchM_Types.h"
 /*Public Function Definitions*/
 /*Public functions shall be exported in SchM.h file and defined in SchM.c file.*/
 
@@ -6,7 +7,7 @@
 ºInitialize the callback funtion passed as reference to the timer module used for the tick reference.
 	Initialize all the tasks according to the task descriptor to suspended state.
 	Initialize the scheduler state to initialized. */
-void SchM_Init(const SchM_ConfigType *SchmConfig){
+void SchM_Init(const SchedulerConfigType *SchmConfig){
 	
 }
 /*Function starts the execution of Scheduler module*/
@@ -39,4 +40,6 @@ Before the task execution:
 After the task execution
 	Set the scheduler state to idle.
 	Set the task state	to suspended.*/
-void SchM_Background(void)
+void SchM_Background(void){
+	
+}

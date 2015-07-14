@@ -22,6 +22,8 @@ typedef void(*INTCInterruptFn)(void);
 /* Function declarations                                                      */
 /*----------------------------------------------------------------------------*/
 
+void enableIrq(void);
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -58,4 +60,3 @@ __declspec (section ".__exception_handlers") void INTC_INTCInterruptHandler(void
 #endif
 
 #endif
-

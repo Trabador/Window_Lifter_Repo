@@ -21,7 +21,7 @@
 /* Includes                                                                  */
 /*---------------------------------------------------------------------------*/
 
-#include "MPC5606B.h"         /* MPC55xx platform development header       */
+#include "MCU_derivative.h"         /* MPC55xx platform development header       */
 
 #include "IntcInterrupts.h"     /* Implement functions from this file */
 
@@ -194,6 +194,12 @@ void INTC_InstallINTCInterruptHandler(INTCInterruptFn handlerFn, unsigned short 
     INTCInterruptsHandlerTable[vectorNum] = handlerFn;
     /* Set the PSR Priority */
     INTC.PSR[vectorNum].B.PRI = psrPriority; 
+}
+
+
+void enableIrq(void) {
+  INTC.CPR.B.PRI = 0;          /* Single Core: Lower INTC's current priority */
+  asm(" wrteei 1");	    	   /* Enable external interrupts */
 }
 
 /**
