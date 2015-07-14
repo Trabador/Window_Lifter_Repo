@@ -20,10 +20,14 @@ void initModesAndClock(void)
 	                              		/* Mode Transition to enter RUN0 mode: */
 	ME.MCTL.R = 0x40005AF0;         	/* Enter RUN0 Mode & Key */
 	ME.MCTL.R = 0x4000A50F;         	/* Enter RUN0 Mode & Inverted Key */  
-	while (ME.GS.B.S_MTRANS) {}     	/* Wait for mode transition to complete */    
+	while (ME.GS.B.S_MTRANS){			/* Wait for mode transition to complete */
+		
+	}
 	                              		/* Note: could wait here using timer and/or I_TC IRQ */
-	while(ME.GS.B.S_CURRENTMODE != 4) 	/* Verify RUN0 is the current mode */
-	{;} 								
+	while(ME.GS.B.S_CURRENTMODE != 4){	/* Verify RUN0 is the current mode */
+	 								
+		;
+	}
 }
 
 void initPeriClkGen(void) 

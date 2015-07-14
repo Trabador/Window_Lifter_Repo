@@ -1,13 +1,30 @@
+#include "SchM.h"
 #include "SchM_Types.h"
+
 /*Public Function Definitions*/
 /*Public functions shall be exported in SchM.h file and defined in SchM.c file.*/
 
 /*Function initialization of Scheduler module*/
-/*The SchM_Init function shall allocate and initialize the resources to be used by the Scheduler Module, including the timer module initialization used for the tick reference and resources requested by the SchMConfig parameter, this means:
-ºInitialize the callback funtion passed as reference to the timer module used for the tick reference.
+/*The SchM_Init function shall allocate and initialize the resources
+to be used by the Scheduler Module,
+including the timer module initialization used for the tick reference
+and resources requested by the SchMConfig parameter, this means:
+	Initialize the callback funtion passed as reference to the timer module used for the tick reference.
 	Initialize all the tasks according to the task descriptor to suspended state.
 	Initialize the scheduler state to initialized. */
+	SchedulerControlType SchedulerControl;
+	SchedulerConfigType * rps_SchedulerConfigPtr;
+	static SchedulerTaskControlType  SchedulerTaskControlArray[6];
 void SchM_Init(const SchedulerConfigType *SchmConfig){
+	T_UBYTE lub_NumberTasks;
+	rps_SchedulerConfigPtr = SchmConfig;	
+	
+	for(lub_NumberTasks = 0;lub_NumberTasks < 4;lub_NumberTasks++){
+		SchedulerTaskControlArray[lub_NumberTasks].SchedulerTaskState = TASK_STATE_SUSPEND;
+		SchedulerTaskControlArray[lub_NumberTasks].TaskFunctionControlPtr = SchmConfig->SchedulerTaskTable->TaskFunctionPtr;
+		
+	}
+	
 	
 }
 /*Function starts the execution of Scheduler module*/

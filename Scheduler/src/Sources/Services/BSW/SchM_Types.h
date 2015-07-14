@@ -1,6 +1,6 @@
-#ifndef __SCHEDULER_TYPES_H
-#define __SCHEDULER_TYPES_H
-	#include "typedefs.h"
+#ifndef __SCHM_TYPES_H
+#define __SCHM_TYPES_H
+	#include "Typedefs.h"
 	typedef void (*TaskFuntionPtrType)(void);
 	typedef uint8_t SchedulerTaskOffsetType;
 	

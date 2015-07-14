@@ -36,7 +36,7 @@
 
 #ifdef __MWERKS__    //Metrowerk CodeWarrior
     #include <stdint.h>
-
+	#include "SchM_Types.h"
     // Standard typedefs used by header files, based on ISO C standard
     typedef volatile int8_t vint8_t;
     typedef volatile uint8_t vuint8_t;
