@@ -10,7 +10,7 @@ const SchedulerTaskTableType SchedulerTaskTableConfig [] = {
 	{6,	MASK_100MS,		TASK_100MS,		(void*)0},
 };
 
-const SchedulerConfigType SchedulerConfig[]={
+const SchedulerConfigType SchedulerConfigSize[]={
 	(sizeof(SchedulerTaskTableConfig)/sizeof(SchedulerTaskTableConfig[0])),
 	SchedulerTaskTableConfig
 };

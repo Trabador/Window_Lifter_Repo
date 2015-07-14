@@ -11,8 +11,8 @@
 		MASK_25MS =		31,
 		MASK_50MS =		63,
 		MASK_100MS =	127
-	}SchedulerTaskMaskType;
-	
+	}
+	SchedulerTaskMaskType;
 	typedef enum{
 		TASK_BKG,
 		TASK_3P125MS,
@@ -21,43 +21,44 @@
 		TASK_25MS,
 		TASK_50MS,
 		TASK_100MS
-	}SchedulerTaskIDType;
-	
+	}
+	SchedulerTaskIDType;
 	typedef enum{
 		TASK_STATE_SUSPEND,
 		TASK_STATE_READY,
 		TASK_STATE_RUNNING
-	}SchedulerTaskStateType;
-	
-	typedef struct{
-		SchedulerTaskStateType SchedulerTaskState;
-		TaskFuntionPtrType TaskFunctionControlPtr; /*TaskControl -> TCB */
-	}SchedulerTaskControlType;
-	
-	typedef struct{
-		SchedulerTaskOffsetType SchedulerTaskOffset;
-		SchedulerTaskMaskType SchedulerTaskMask;
-		SchedulerTaskIDType SchedulerTaskId;
-		TaskFuntionPtrType TaskFunctionPtr;
-	}SchedulerTaskTableType;
-	
-	typedef struct{
-		uint8_t SchedulerNumberOfTask;
-		const SchedulerTaskTableType *SchedulerTaskTable;
-	}SchedulerConfigType;
-	
+	}
+	SchedulerTaskStateType;
 	typedef enum{
 		SCHEDULER_UNINIT,
 		SCHEDULER_INIT,
 		SCHEDULER_RUNNING,
 		SCHEDULER_OVERLOAD,
 		SCHEDULER_HALTED
-	}SchedulerStateType;
-	
+	}
+	SchedulerStateType;
+	typedef struct{
+		uint8_t SchedulerNumberOfTask;
+		const SchedulerTaskTableType *SchedulerTaskTable;
+	}
+	SchedulerConfigType;
+	typedef struct{
+		SchedulerTaskStateType SchedulerTaskState;
+		TaskFuntionPtrType TaskFunctionControlPtr; /*TaskControl -> TCB */
+	}
+	SchedulerTaskControlType;
+	typedef struct{
+		SchedulerTaskOffsetType SchedulerTaskOffset;
+		SchedulerTaskMaskType SchedulerTaskMask;
+		SchedulerTaskIDType SchedulerTaskId;
+		TaskFuntionPtrType TaskFunctionPtr;
+	}
+	SchedulerTaskTableType;
 	typedef struct{
 		uint8_t SchedulerCounter;
 		SchedulerTaskIDType SchedulerTaskRunning;
 		SchedulerStateType SchedulerStatus;
-	}SchedulerControlType;
+	}
+	SchedulerControlType;
 #endif
 

@@ -46,6 +46,25 @@
 
     typedef volatile int32_t vint32_t;
     typedef volatile uint32_t vuint32_t;
+    
+    /*type used for callback function*/
+	typedef void  ( * tCallbackFunction )( void  );
+	
+    /*type used to define pointers to function*/
+    typedef void  ( * tptr_to_fctn )( void );
+    
+    #ifndef NULL
+  		#define    NULL    ( ( void * ) 0 )
+	#endif
+	
+	typedef volatile unsigned char T_UBYTE;
+	typedef volatile unsigned short T_UWORD;
+	typedef volatile unsigned int T_ULONG;
+
+	typedef volatile signed char T_SBYTE;
+	typedef volatile signed short T_SWORD;
+	typedef volatile signed int T_SLONG;	
+
 
 #else
 #ifdef __ghs__    //GreenHills
@@ -79,6 +98,7 @@
     typedef unsigned int uint32_t;
     typedef volatile signed int vint32_t;
     typedef volatile unsigned int vuint32_t;
+
 
 #endif
 #endif

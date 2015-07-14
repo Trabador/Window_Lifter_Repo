@@ -16,7 +16,7 @@
 
 /** Core Modules */
 /** Variable types and common definitions */
-    #include    "typedefs.h"
+#include    "typedefs.h"
 
 /** Used Modules */
 
@@ -29,7 +29,7 @@
 *****************************************************************************************************/
 
 /* PIT_Callback[], function to be called upon event trigger on PIT channels */
-extern tCallbackFunction PIT_Callback[8] ;
+extern tCallbackFunction PIT_Callback[8];
 	
 
 /*****************************************************************************************************
@@ -69,3 +69,4 @@ void PIT_channel_0_isr( void  );
 /*******************************************************************************/
 
 #endif /* __PIT_H */
+
