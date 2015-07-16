@@ -46,7 +46,8 @@
 		SchedulerTaskMaskType SchedulerTaskMask;
 		SchedulerTaskIDType SchedulerTaskId;
 		TaskFuntionPtrType TaskFunctionPtr;
-	}SchedulerTaskTableType;
+	}
+	SchedulerTaskTableType;
 	
 	typedef struct{
 		uint8_t SchedulerNumberOfTask;
