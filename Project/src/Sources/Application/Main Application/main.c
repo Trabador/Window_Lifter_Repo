@@ -108,7 +108,7 @@
     enableIrq();
 	
 	
-	SchM_Init(&SchConfig);
+	SchM_Init(&cs_SchConfig);
 	SchM_Start();
 	
 	/* Infinite loop */
