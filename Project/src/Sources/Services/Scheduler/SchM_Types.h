@@ -22,6 +22,12 @@
 /*  1.0      | 13/07/2015  | 				               |Alexis Garcia     */
 /* 								                                              */
 /*============================================================================*/
+/*============================================================================*/
+/*  REVISION |   DATE      |                               |      AUTHOR      */
+/*----------------------------------------------------------------------------*/
+/*  2.0      | 17/07/2015  | Correction of naming convention |Alexis Garcia     */
+/* 								                                              */
+/*============================================================================*/
 #ifndef _SCHEDULER_TYPE_H
 #define _SCHEDULER_TYPE_H
 
@@ -47,7 +53,7 @@ typedef enum
 	MASK_50MS =    63,
 	MASK_100MS =   127
 	
-}SchTaskMaskType;
+}E_SchTaskMaskType;
 
 typedef enum
 {
@@ -59,7 +65,7 @@ typedef enum
 	TASK_50MS,
 	TASK_100MS
 	
-}SchTaskIdType;
+}E_SchTaskIdType;
 
 typedef enum
 {
@@ -67,29 +73,29 @@ typedef enum
 	TASK_STATE_READY,
 	TASK_STATE_RUNNING
 	
-}SchTaskStateType;
+}E_SchTaskStateType;
 
 typedef struct
 {
-	SchTaskStateType SchTaskState;
+	E_SchTaskStateType SchTaskState;
 	TaskFunctionPtrType	TaskFunctionControlPtr;
 	
-}SchTaskControlBlock;
+}S_SchTaskControlBlock;
 
 typedef struct
 {
 	rub_SchTaskOffsetType SchTaskOffset;
-	SchTaskMaskType SchTaskMask;
-	SchTaskIdType SchTaskId;
+	E_SchTaskMaskType SchTaskMask;
+	E_SchTaskIdType SchTaskId;
 	TaskFunctionPtrType TaskFunctionPtr;
 	
-}SchTaskTableType;
+}S_SchTaskTableType;
 
 typedef struct
 {
 	T_UBYTE SchNumberOfTasks;
-	const SchTaskTableType *SchTaskTable;
-}SchConfigType;
+	const S_SchTaskTableType *SchTaskTable;
+}S_SchConfigType;
 
 typedef enum
 {
@@ -99,15 +105,15 @@ typedef enum
 	SCH_OVERLOAD,
 	SCH_HALTED
 	
-}SchStateType;
+}E_SchStateType;
 
 typedef struct
 {
 	T_UBYTE SchCounter;
-	SchTaskIdType SchTaskRunning;
-	SchStateType SchStatus;
+	E_SchTaskIdType SchTaskRunning;
+	E_SchStateType SchStatus;
 	
-}SchControlType;
+}S_SchControlType;
 
 /*==================================================*/ 
 /* Declaration of exported constants                */

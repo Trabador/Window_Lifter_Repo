@@ -23,6 +23,13 @@
 /* 									                                          */
 /*============================================================================*/
 
+/*============================================================================*/
+/*  REVISION |   DATE      |                               |      AUTHOR      */
+/*----------------------------------------------------------------------------*/
+/*  2.0      | 17/07/2015  | Correction of naming convention |Alexis Garcia     */
+/* 								                                              */
+/*============================================================================*/
+
 /* Includes */
 /* -------- */
 
@@ -55,9 +62,9 @@
 
 
 /* LONG and STRUCTURE RAM variables */
- SchControlType SchControl;
- const SchConfigType * rps_SchConfigurationPtr;
- SchTaskControlBlock *SchTaskControl;
+ S_SchControlType rs_SchControl;
+ const S_SchConfigType * cps_SchConfigurationPtr;
+ S_SchTaskControlBlock * rps_SchTaskControl;
 
 /*======================================================*/ 
 /* close variable declaration sections                  */
@@ -95,25 +102,25 @@
  *  Return               :	void
  *  Critical/explanation :  [yes]
  **************************************************************/
- void SchM_Init(const SchConfigType *SchM_Config)
+ void SchM_Init(const S_SchConfigType *cs_SchM_Config)
  {
  	T_UBYTE lub_i;
- 	SchTaskTableType * aux;
+ 	S_SchTaskTableType * lps_TablePtr;
  	
  	
  	PIT_device_init();
     PIT_channel_configure(PIT_CHANNEL_0 , SchM_OsTick);	
- 	rps_SchConfigurationPtr = SchM_Config;
- 	aux = (SchTaskTableType *)SchM_Config->SchTaskTable;
+ 	cps_SchConfigurationPtr = cs_SchM_Config;
+ 	lps_TablePtr = (S_SchTaskTableType *)cs_SchM_Config->SchTaskTable;
  	
- 	SchTaskControl = (SchTaskControlBlock *)MemAlloc(sizeof(SchTaskControlBlock)*SchM_Config->SchNumberOfTasks);
+ 	rps_SchTaskControl = (S_SchTaskControlBlock *)MemAlloc(sizeof(S_SchTaskControlBlock)*cs_SchM_Config->SchNumberOfTasks);
  	
- 	for(lub_i=0;lub_i<SchM_Config->SchNumberOfTasks;lub_i++)
+ 	for(lub_i=0;lub_i<cs_SchM_Config->SchNumberOfTasks;lub_i++)
  	{
- 		SchTaskControl[lub_i].SchTaskState = TASK_STATE_SUSPENDED;
- 		SchTaskControl[lub_i].TaskFunctionControlPtr = aux[lub_i].TaskFunctionPtr;
+ 		rps_SchTaskControl[lub_i].SchTaskState = TASK_STATE_SUSPENDED;
+ 		rps_SchTaskControl[lub_i].TaskFunctionControlPtr = lps_TablePtr[lub_i].TaskFunctionPtr;
  	}
- 	SchControl.SchStatus = SCH_INIT;
+ 	rs_SchControl.SchStatus = SCH_INIT;
  }
  
  
@@ -127,7 +134,7 @@
  void SchM_Stop(void)
  {
  	PIT_channel_stop(PIT_CHANNEL_0);
- 	SchControl.SchStatus = SCH_HALTED;
+ 	rs_SchControl.SchStatus = SCH_HALTED;
  }
  
  
@@ -141,7 +148,7 @@
  void SchM_Start(void)
  {
  	PIT_channel_start(PIT_CHANNEL_0);
- 	SchControl.SchCounter = 0;
+ 	rs_SchControl.SchCounter = 0;
  	SchM_Background();		
  }
  
@@ -159,15 +166,15 @@
  {
  
  	T_UBYTE lub_i;
- 	SchTaskTableType * aux;
+ 	S_SchTaskTableType * lps_TablePtr;
  	
- 	SchControl.SchCounter++;
- 	aux = (SchTaskTableType *)rps_SchConfigurationPtr->SchTaskTable;
- 	for(lub_i=0;lub_i<rps_SchConfigurationPtr->SchNumberOfTasks;lub_i++)
+ 	rs_SchControl.SchCounter++;
+ 	lps_TablePtr  = (S_SchTaskTableType *)cps_SchConfigurationPtr->SchTaskTable;
+ 	for(lub_i=0;lub_i<cps_SchConfigurationPtr->SchNumberOfTasks;lub_i++)
  	{
- 		if(((aux[lub_i].SchTaskMask) & (SchControl.SchCounter)) == aux[lub_i].SchTaskOffset)
+ 		if(((lps_TablePtr[lub_i].SchTaskMask) & (rs_SchControl.SchCounter)) == lps_TablePtr[lub_i].SchTaskOffset)
  		{
- 			SchTaskControl[lub_i].SchTaskState = TASK_STATE_READY;
+ 			rps_SchTaskControl[lub_i].SchTaskState = TASK_STATE_READY;
  		}
  	}
  	
@@ -187,14 +194,14 @@
  	T_UBYTE lub_i;
  	for(;;)	/*infinite loop*/
  	{
- 		for(lub_i=0;lub_i<rps_SchConfigurationPtr->SchNumberOfTasks;lub_i++)
+ 		for(lub_i=0;lub_i<cps_SchConfigurationPtr->SchNumberOfTasks;lub_i++)
  		{
- 			if(SchTaskControl[lub_i].SchTaskState == TASK_STATE_READY)
+ 			if(rps_SchTaskControl[lub_i].SchTaskState == TASK_STATE_READY)
  			{
- 				SchControl.SchStatus = SCH_RUNNING;
- 				SchTaskControl[lub_i].SchTaskState = TASK_STATE_RUNNING;
- 				SchTaskControl[lub_i].TaskFunctionControlPtr();
- 				SchTaskControl[lub_i].SchTaskState = TASK_STATE_SUSPENDED;
+ 				rs_SchControl.SchStatus = SCH_RUNNING;
+ 				rps_SchTaskControl[lub_i].SchTaskState = TASK_STATE_RUNNING;
+ 				rps_SchTaskControl[lub_i].TaskFunctionControlPtr();
+ 				rps_SchTaskControl[lub_i].SchTaskState = TASK_STATE_SUSPENDED;
  			}
  		}
  	}

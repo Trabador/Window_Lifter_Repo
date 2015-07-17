@@ -22,7 +22,12 @@
 /*  1.0      | 13/07/2015  |                               |Alexis Garcia     */
 /* 									                                          */
 /*============================================================================*/
-
+/*============================================================================*/
+/*  REVISION |   DATE      |                               |      AUTHOR      */
+/*----------------------------------------------------------------------------*/
+/*  2.0      | 17/07/2015  | Correction of naming convention |Alexis Garcia     */
+/* 								                                              */
+/*============================================================================*/
 /* Includes */
 /* -------- */
 #include "GPIO.h"	/*for test purposes*/
@@ -90,7 +95,7 @@
  *  Return               :	void
  *  Critical/explanation :  [No]
  **************************************************************/
- void task_3P125MS(void)
+ void Sch_Task3P125MS(void)
  {
  	
  }
@@ -103,7 +108,7 @@
  *  Return               :	void
  *  Critical/explanation :  [No]
  **************************************************************/
- void task_6P25MS(void)
+ void Sch_Task6P25MS(void)
  {
  	
  }
@@ -116,9 +121,9 @@
  *  Return               :	void
  *  Critical/explanation :  [No]
  **************************************************************/
- void task_12P5MS(void)
+ void Sch_Task12P5MS(void)
  {
- 	/*for test purposes*/
+ 	LED_TOGGLE(LED1);/*for test purposes*/
  }
  
  
@@ -129,9 +134,9 @@
  *  Return               :	void
  *  Critical/explanation :  [No]
  **************************************************************/
- void task_25MS(void)
+ void Sch_Task25MS(void)
  {
- 	LED_TOGGLE(LED3);
+ 	LED_TOGGLE(LED2);
  }
  
  
@@ -142,9 +147,9 @@
  *  Return               :	void
  *  Critical/explanation :  [No]
  **************************************************************/
- void task_50MS(void)
+ void Sch_Task50MS(void)
  {
- 	LED_TOGGLE(LED1);/*for test purposes*/
+ 	LED_TOGGLE(LED3);/*for test purposes*/
  }
  
  
@@ -155,9 +160,9 @@
  *  Return               :	void
  *  Critical/explanation : 	[No]
  **************************************************************/
- void task_100MS(void)
+ void Sch_Task100MS(void)
  {
- 	LED_TOGGLE(LED2);
+ 	LED_TOGGLE(LED4);
  }
  
  

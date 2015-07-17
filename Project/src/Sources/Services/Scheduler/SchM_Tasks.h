@@ -22,8 +22,14 @@
 /*  1.0      | 13/07/2015  | 				               |Alexis Garcia     */
 /* 											                                  */
 /*============================================================================*/
-
-
+/*============================================================================*/
+/*  REVISION |   DATE      |                               |      AUTHOR      */
+/*----------------------------------------------------------------------------*/
+/*  2.0      | 17/07/2015  | Correction of naming convention |Alexis Garcia     */
+/* 								                                              */
+/*============================================================================*/
+#ifndef TASKS_H
+#define TASKS_H
 /* Includes */
 /* -------- */
 
@@ -68,14 +74,15 @@
 /* ---------------------------------------- */
 
 /* Functions prototypes */
-extern void task_3P125MS(void);
-extern void task_6P25MS(void);
-extern void task_12P5MS(void);
-extern void task_25MS(void);
-extern void task_50MS(void);
-extern void task_100MS(void);
+extern void Sch_Task3P125MS(void);
+extern void Sch_Task6P25MS(void);
+extern void Sch_Task12P5MS(void);
+extern void Sch_Task25MS(void);
+extern void Sch_Task50MS(void);
+extern void Sch_Task100MS(void);
 
 /* Functions macros */
 
 
 /* Exported defines */
+#endif

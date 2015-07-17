@@ -23,6 +23,13 @@
 /* 								                                              */
 /*============================================================================*/
 
+
+/*============================================================================*/
+/*  REVISION |   DATE      |                               |      AUTHOR      */
+/*----------------------------------------------------------------------------*/
+/*  2.0      | 17/07/2015  | Correction of naming convention |Alexis Garcia     */
+/* 								                                              */
+/*============================================================================*/
 /* Includes */
 /* -------- */
 #include "SchM_Cfg.h"
@@ -45,21 +52,21 @@
 
 
 /* LONG and STRUCTURE constants */
-const SchTaskTableType SchTaskTableConfig [] =
+const S_SchTaskTableType cas_SchTaskTableConfig [] =
 {
 	/*Offset, Mask, TaskID, Function Pointer*/
-	{0, MASK_3P125MS, TASK_3P125MS, &task_3P125MS},
-	{1, MASK_6P25MS,   TASK_6P25MS, &task_6P25MS},
-	{2, MASK_12P5MS,   TASK_12P5MS, &task_12P5MS},
-	{3, MASK_25MS,       TASK_25MS, &task_25MS},
-	{5, MASK_50MS,       TASK_50MS, &task_50MS},
-	{6, MASK_100MS,     TASK_100MS, &task_100MS}
+	{0, MASK_3P125MS, TASK_3P125MS, &Sch_Task3P125MS},
+	{1, MASK_6P25MS,   TASK_6P25MS, &Sch_Task6P25MS},
+	{2, MASK_12P5MS,   TASK_12P5MS, &Sch_Task12P5MS},
+	{3, MASK_25MS,       TASK_25MS, &Sch_Task25MS},
+	{5, MASK_50MS,       TASK_50MS, &Sch_Task50MS},
+	{6, MASK_100MS,     TASK_100MS, &Sch_Task100MS}
 };
 
-const SchConfigType SchConfig = 
+const S_SchConfigType cs_SchConfig = 
 {
-	(sizeof(SchTaskTableConfig)/sizeof(SchTaskTableConfig[0])),
-	SchTaskTableConfig	
+	(sizeof(cas_SchTaskTableConfig)/sizeof(cas_SchTaskTableConfig[0])),
+	cas_SchTaskTableConfig	
 };
 
 

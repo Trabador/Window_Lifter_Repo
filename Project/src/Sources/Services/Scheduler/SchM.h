@@ -22,6 +22,13 @@
 /*  1.0      | 13/07/2015  | 			                   |Alexis Garcia     */
 /* 								                                              */
 /*============================================================================*/
+
+/*============================================================================*/
+/*  REVISION |   DATE      |                               |      AUTHOR      */
+/*----------------------------------------------------------------------------*/
+/*  2.0      | 17/07/2015  | Correction of naming convention |Alexis Garcia     */
+/* 								                                              */
+/*============================================================================*/
 #ifndef _SCHEDULER_H
 #define _SCHEDULER_H
 
@@ -72,7 +79,7 @@
 
 /* Functions prototypes */
 /*Scheduler Initialization*/
-extern void SchM_Init(const SchConfigType *SchM_Config);
+extern void SchM_Init(const S_SchConfigType *cs_SchM_Config);
 /*Scheduler De-initialization*/
 extern void SchM_Stop(void);
 /*Scheduler Start*/

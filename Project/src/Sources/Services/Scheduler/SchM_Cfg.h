@@ -22,7 +22,12 @@
 /*  1.0      | 13/07/2015  | 				               |Alexis Garcia     */
 /* 								                                              */
 /*============================================================================*/
-
+/*============================================================================*/
+/*  REVISION |   DATE      |                               |      AUTHOR      */
+/*----------------------------------------------------------------------------*/
+/*  2.0      | 17/07/2015  | Correction of naming convention |Alexis Garcia     */
+/* 								                                              */
+/*============================================================================*/
 
 #ifndef _SCHEDULER_CFG_H
 #define _SCHEDULER_CFG_H
@@ -32,7 +37,7 @@
 
 /* Exported types and constants */
 /* ---------------------------- */
-extern const SchConfigType SchConfig;
+extern const S_SchConfigType cs_SchConfig;
 /* Types definition */
 /* typedef */
 
