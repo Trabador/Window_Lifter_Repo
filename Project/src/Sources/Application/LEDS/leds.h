@@ -1,9 +1,43 @@
+/*============================================================================*/
+/*                        SV C BC SOFTWARE GROUP                              */
+/*============================================================================*/
+/*                        OBJECT SPECIFICATION                                */
+/*============================================================================*
+* C Include:        %leds.h%
+* Instance:         1
+* %version:         1 %
+* %created_by:      Alexis Garcia %
+* %date_created:    20/07/2015 %
+*=============================================================================*/
+/* DESCRIPTION : Header for the leds.c                                         */
+/*============================================================================*/
+/* FUNCTION COMMENT : Contains defines to be used in the other modules and exported
+						functions to config the leds						    */
+/* 																	           */
+/*                                                                            */
+/*============================================================================*/
+/*                               OBJECT HISTORY                               */
+/*============================================================================*/
+/*  REVISION |   DATE      |                               |      AUTHOR      */
+/*----------------------------------------------------------------------------*/
+/*  1.0      | 20/07/2015  | creation of the header               | Alexis Garcia     */
+/*                                             */
+/*============================================================================*/
+
 #ifndef _LEDS_H
 #define _LEDS_H
 
+
+/* Includes */
+/* -------- */
 #include "typedefs.h"
 #include "GPIO.h"
 
+/* Exported types and constants */
+/* ---------------------------- */
+
+/* Types definition */
+/* typedef */
 #define 	LED_G_OFF (SIU.GPDO[led_g].R = 1)
 #define 	LED_G_ON (SIU.GPDO[led_g].R = 0) 
 #define 	LED1_OFF (SIU.GPDO[led1].R = 1 )
@@ -34,7 +68,16 @@
 #define 	min_Led_Number 		0
 #define 	one_Led		1
 
+/*==================================================*/ 
+/* Declaration of exported constants                */
+/*==================================================*/ 
+/* BYTE constants */
 
+
+/* WORD constants */
+
+
+/* LONG and STRUCTURE constants */
 typedef enum 
 {
 	led_b,
@@ -52,7 +95,33 @@ typedef enum
 	
 }E_LedType;
 
+
+/*======================================================*/ 
+/* Definition of RAM variables                          */
+/*======================================================*/ 
+/* BYTES */
+
+
+/* WORDS */
+
+
+/* LONGS and STRUCTURES */
+
+
+/*======================================================*/ 
+/* close variable declaration sections                  */
+/*======================================================*/ 
+
+/* Exported functions prototypes and macros */
+/* ---------------------------------------- */
+
+/* Functions prototypes */
+
 extern void initLeds(void);
+/* Functions macros */
+
+
+/* Exported defines */
 extern E_LedType led_list;
 
 #endif
