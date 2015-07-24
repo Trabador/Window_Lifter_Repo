@@ -1,3 +1,32 @@
+/*============================================================================*/
+/*                        SV C CE SOFTWARE GROUP                              */
+/*============================================================================*/
+/*                        OBJECT SPECIFICATION                                */
+/*============================================================================*
+* C Source:         %SchM.c%
+* Instance:         RPL_1
+* %version:         1 %
+* %created_by:      uid10734106 %
+* %date_created:    Mon Jul  13 17:36 2015 %
+*=============================================================================*/
+/* DESCRIPTION :The Schm.c File Is The Main File For The Ejecution Of The
+				Task, Decide Wich Task Must Enter And When.					  */
+/*============================================================================*/
+/* FUNCTION COMMENT :	Initialize The Scheduler, Set All Task To Idle And	  */
+/*                      Start The PIT Function For The Scheduler.			  */
+/*============================================================================*/
+/*                               OBJECT HISTORY                               */
+/*============================================================================*/
+/*  REVISION |   DATE      |                               |      AUTHOR      */
+/*----------------------------------------------------------------------------*/
+/*  1.0      | 17/07/2015  |                               | Roberto Palos    */
+/* 	Version 1 No Error In The Scheduler, Execute The Task At The Defined
+				Times.														  */
+/*============================================================================*/
+
+/* Includes */
+/* -------- */
+
 #include "SchM.h"
 #include "SchM_Types.h"
 #include "PIT.h"
@@ -15,12 +44,24 @@ and resources requested by the SchMConfig parameter, this means:
 	Initialize all the tasks according to the task descriptor to suspended state.
 	Initialize the scheduler state to initialized. */
 	
-	
-	SchedulerControlType SchedulerControl;
-	const SchedulerConfigType  * rps_SchedulerConfigPtr;
-	SchedulerTaskControlType *SchedulerTaskControl;
-	
-	
+/*======================================================*/ 
+/* Definition of RAM variables                          */
+/*======================================================*/ 
+/* LONG and STRUCTURE RAM variables */
+SchedulerControlType SchedulerControl;
+const SchedulerConfigType  * rps_SchedulerConfigPtr;
+SchedulerTaskControlType *SchedulerTaskControl;
+
+
+/* Exported functions */
+/* ------------------ */
+/**************************************************************
+ *  Name                 :	export_func
+ *  Description          :
+ *  Parameters           :  [Input, Output, Input / output]
+ *  Return               :
+ *  Critical/explanation :    [yes / No]
+ **************************************************************/
 void SchM_Init(const SchedulerConfigType *SchmConfig){
 	T_UBYTE lub_Init;
 	vfnGPIO_LED_Init();

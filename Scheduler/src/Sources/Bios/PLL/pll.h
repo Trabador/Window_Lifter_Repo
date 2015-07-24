@@ -4,6 +4,6 @@
 	void InitSysclk(void);
 	void InitModesAndClocks(void);
 	void InitPeriClkGen(void);
-	void initTimer(void);
+	void InitTimer(void);
 	void DisableWatchdog(void);
 #endif

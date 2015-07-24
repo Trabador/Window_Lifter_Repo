@@ -1,19 +1,76 @@
+/*============================================================================*/
+/*                        SV C CE SOFTWARE GROUP                              */
+/*============================================================================*/
+/*                        OBJECT SPECIFICATION                                */
+/*============================================================================*
+* C Source:         %pll.c%
+* Instance:         RPL_1
+* %version:         1 %
+* %created_by:      uid10734106 %
+* %date_created:    Mon Jul  13 17:36 2015 %
+*=============================================================================*/
+/* DESCRIPTION :The pll.c Include All The Configuration To Initialize The    
+				Microcontroller HardWare.									  */
+/*============================================================================*/
+/* FUNCTION COMMENT :	Disabble WatchDog, Initialize The Microcontroller To
+						In 8 MHz Crystal, Initialize The Timer For Delay
+						Function.											  */
+/*                                                                            */
+/*============================================================================*/
+/*                               OBJECT HISTORY                               */
+/*============================================================================*/
+/*  REVISION |   DATE      |                               |      AUTHOR      */
+/*----------------------------------------------------------------------------*/
+/*  1.0      | 17/07/2015  |                               | Roberto Palos    */
+/* 	Version 1 Removed The Doble Call To Function "InitModesAndClocks.		  */
+/*============================================================================*/
+
+/* Includes */
+/* -------- */
 #include "pll.h"
 /* MCU-specific derivative */
 #include "MCU_derivative.h" 
 /* Data types */
 #include "typedefs.h"
 
+
+/* Exported functions */
+/* ------------------ */
+/**************************************************************
+ *  Name                 : InitHW
+ *  Description          :
+ *  Parameters           :  [/]
+ *  Return               :
+ *  Critical/explanation :    [No]
+ **************************************************************/
 void InitHW(void){
 	DisableWatchdog();
-	InitModesAndClocks();
-	initTimer();
 	InitSysclk();
+	InitTimer();
 }
+
+
+/* Private functions */
+/* ----------------- */
+/**************************************************************
+ *  Name                 : InitSysclk
+ *  Description          :
+ *  Parameters           :  [/]
+ *  Return               :
+ *  Critical/explanation :    [No]
+ **************************************************************/
 void InitSysclk(void){
 	InitModesAndClocks();
 	InitPeriClkGen();
 }
+
+/**************************************************************
+ *  Name                 : InitModesAndClocks
+ *  Description          :
+ *  Parameters           :  [/]
+ *  Return               :
+ *  Critical/explanation :    [No]
+ **************************************************************/
 void InitModesAndClocks(void){
 	ME.MER.R = 0x0000001D;          	/* Enable DRUN, RUN0, SAFE, RESET modes */
 	                              		/* Initialize PLL before turning it on: */
@@ -34,14 +91,38 @@ void InitModesAndClocks(void){
 	while(ME.GS.B.S_CURRENTMODE != 4) 	/* Verify RUN0 is the current mode */
 	{;} 								
 }
+
+/**************************************************************
+ *  Name                 : InitPeriClkGen
+ *  Description          :
+ *  Parameters           :  [/]
+ *  Return               :
+ *  Critical/explanation :    [No]
+ **************************************************************/
 void InitPeriClkGen(void){
 	CGM.SC_DC[2].R = 0x80;          	/* MPC56xxB: Enable peri set 3 sysclk divided by 1 */
 }
-void initTimer(void){
+
+/**************************************************************
+ *  Name                 : InitTimer
+ *  Description          :
+ *  Parameters           :  [/]
+ *  Return               :
+ *  Critical/explanation :    [No]
+ **************************************************************/
+void InitTimer(void){
 	STM.CR.R=0x00003F01;
 	STM.CH[0].CCR.R=1;
 	STM.CNT.R=0;
 }
+
+/**************************************************************
+ *  Name                 : DisableWatchdog
+ *  Description          :
+ *  Parameters           :  [/]
+ *  Return               :
+ *  Critical/explanation :    [No]
+ **************************************************************/
 void DisableWatchdog(void){
 	SWT.SR.R = 0x0000c520;     /* Write keys to clear soft lock bit */
 	SWT.SR.R = 0x0000d928;

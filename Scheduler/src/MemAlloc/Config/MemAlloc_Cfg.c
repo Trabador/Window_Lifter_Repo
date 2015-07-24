@@ -8,12 +8,18 @@
 */
 /*******************************************************************************/
 
+/* Includes */
+/* -------- */
+
 #include "MemAlloc_Cfg.h"
 
 
+/* LONG and STRUCTURE constants */
 extern const T_ULONG _heap_addr;
 extern const T_ULONG _heap_end;
 
+/* Functions macros, constants, types and datas         */
+/* ---------------------------------------------------- */
 
 const MemAllocConfigType MemAllocConfig = 
 {
