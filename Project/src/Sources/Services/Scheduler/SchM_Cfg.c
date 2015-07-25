@@ -3,7 +3,7 @@
 /*============================================================================*/
 /*                        OBJECT SPECIFICATION                                */
 /*============================================================================*
-* C Source:         %main.c%
+* C Source:         %SchM_Cfg.c%
 * Instance:         1
 * %version:         1 %
 * %created_by:      Alexis Garcia %
@@ -12,29 +12,32 @@
 /* DESCRIPTION : 					                                          */
 /*============================================================================*/
 /* FUNCTION COMMENT : 														  */
-/* 							                                                  */
+/* 								                                              */
 /*                                                                            */
 /*============================================================================*/
 /*                               OBJECT HISTORY                               */
 /*============================================================================*/
 /*  REVISION |   DATE      |                               |      AUTHOR      */
 /*----------------------------------------------------------------------------*/
-/*  1.0      | 13/07/2015  |                               | Alexis Garcia    */
-/* 									                                          */
+/*  1.0      | 13/07/2015  |                               |Alexis Garcia     */
+/* 								                                              */
 /*============================================================================*/
+
+
 /*============================================================================*/
 /*  REVISION |   DATE      |                               |      AUTHOR      */
 /*----------------------------------------------------------------------------*/
-/*  2.0      | 17/07/2015  | Correction of naming convention |Alexis Garcia   */
+/*  2.0      | 17/07/2015  | Correction of naming convention |Alexis Garcia     */
 /* 								                                              */
 /*============================================================================*/
 /* Includes */
 /* -------- */
-#include    "MCU_derivative.h"
-#include    "GPIO.h"
-#include    "SchM.h"
-#include 	"MemAlloc_Cfg.h"
-#include 	"window_lifter.h"
+#include "SchM_Cfg.h"
+#include "SchM_Tasks.h"
+
+
+
+
 /* Functions macros, constants, types and datas         */
 /* ---------------------------------------------------- */
 /* Functions macros */
@@ -49,7 +52,22 @@
 
 
 /* LONG and STRUCTURE constants */
+const S_SchTaskTableType cas_SchTaskTableConfig [] =
+{
+	/*Offset, Mask, TaskID, Function Pointer*/
+	{0, MASK_3P125MS, TASK_3P125MS, &Sch_Task3P125MS},
+	{1, MASK_6P25MS,   TASK_6P25MS, &Sch_Task6P25MS},
+	{2, MASK_12P5MS,   TASK_12P5MS, &Sch_Task12P5MS},
+	{3, MASK_25MS,       TASK_25MS, &Sch_Task25MS},
+	{5, MASK_50MS,       TASK_50MS, &Sch_Task50MS},
+	{6, MASK_100MS,     TASK_100MS, &Sch_Task100MS}
+};
 
+const S_SchConfigType cs_SchConfig = 
+{
+	(sizeof(cas_SchTaskTableConfig)/sizeof(cas_SchTaskTableConfig[0])),
+	cas_SchTaskTableConfig	
+};
 
 
 /*======================================================*/ 
@@ -74,58 +92,39 @@
 /* Private functions prototypes */
 /* ---------------------------- */
 
+
+
 /* Exported functions prototypes */
 /* ----------------------------- */
 
 /* Inline functions */
 /* ---------------- */
+/**************************************************************
+ *  Name                 : inline_func	2
+ *  Description          :
+ *  Parameters           :  [Input, Output, Input / output]
+ *  Return               :
+ *  Critical/explanation :    [yes / No]
+ **************************************************************/
 
- void disableWatchdog(void) 
- {
-  	SWT.SR.R = 0x0000c520;     /* Write keys to clear soft lock bit */
-  	SWT.SR.R = 0x0000d928; 
-  	SWT.CR.R = 0x8000010A;     /* Clear watchdog enable (WEN) */
- }
 
 /* Private functions */
 /* ----------------- */
 /**************************************************************
- *  Name                 : 	main
- *  Description          :	main function
- *  Parameters           :  void
- *  Return               :	int
- *  Critical/explanation :  [No]
+ *  Name                 : private_func
+ *  Description          :
+ *  Parameters           :  [Input, Output, Input / output]
+ *  Return               :
+ *  Critical/explanation :    [yes / No]
  **************************************************************/
- /*~~~~~~~ Main Code ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
- int main(void) 
- {
-	/*enbles and cofigures the memory allocation for the scheduler control block*/
-	MemAllocInit(&MemAllocConfig);
-	initModesAndClock();
-	/* Disable Watchdog */
-	disableWatchdog();
-	/*Initialize LEDs on TRK-MPC560xB board */
-	vfnGPIO_LED_Init();	
-	/*Initialize Interrupts */
-	INTC_InitINTCInterrupts();
-	/*Initialize Exception Handlers */
-	EXCEP_InitExceptionHandlers();
-    /* Enable External Interrupts*/
-    enableIrq();
-    
-    initGPIO();
-    BM_InitButtons();
-    LED_InitLeds();
-	
-	
-	SchM_Init(&cs_SchConfig);
-	SchM_Start();
-	
-	/* Infinite loop */
-	for (;;) 
-	{
-		/*Dummy line*/
-	}
- }
 
- /*~~~~~~~ End of Main Code ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/* Exported functions */
+/* ------------------ */
+/**************************************************************
+ *  Name                 :	export_func
+ *  Description          :
+ *  Parameters           :  [Input, Output, Input / output]
+ *  Return               :
+ *  Critical/explanation :    [yes / No]
+ **************************************************************/

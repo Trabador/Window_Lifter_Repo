@@ -82,7 +82,7 @@
 
 #else
 
-    /* This is needed for compilers that don't have a stdint.h file*/
+    // This is needed for compilers that don't have a stdint.h file
 
     typedef signed char int8_t;
     typedef unsigned char uint8_t;

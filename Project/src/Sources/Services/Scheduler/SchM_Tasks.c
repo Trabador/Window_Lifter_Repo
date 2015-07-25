@@ -3,7 +3,7 @@
 /*============================================================================*/
 /*                        OBJECT SPECIFICATION                                */
 /*============================================================================*
-* C Source:         %main.c%
+* C Source:         %SchM_Tasks.c%
 * Instance:         1
 * %version:         1 %
 * %created_by:      Alexis Garcia %
@@ -12,29 +12,26 @@
 /* DESCRIPTION : 					                                          */
 /*============================================================================*/
 /* FUNCTION COMMENT : 														  */
-/* 							                                                  */
+/* 									                                          */
 /*                                                                            */
 /*============================================================================*/
 /*                               OBJECT HISTORY                               */
 /*============================================================================*/
 /*  REVISION |   DATE      |                               |      AUTHOR      */
 /*----------------------------------------------------------------------------*/
-/*  1.0      | 13/07/2015  |                               | Alexis Garcia    */
+/*  1.0      | 13/07/2015  |                               |Alexis Garcia     */
 /* 									                                          */
 /*============================================================================*/
 /*============================================================================*/
 /*  REVISION |   DATE      |                               |      AUTHOR      */
 /*----------------------------------------------------------------------------*/
-/*  2.0      | 17/07/2015  | Correction of naming convention |Alexis Garcia   */
+/*  2.0      | 17/07/2015  | Correction of naming convention |Alexis Garcia     */
 /* 								                                              */
 /*============================================================================*/
 /* Includes */
 /* -------- */
-#include    "MCU_derivative.h"
-#include    "GPIO.h"
-#include    "SchM.h"
-#include 	"MemAlloc_Cfg.h"
-#include 	"window_lifter.h"
+#include "GPIO.h"	/*for test purposes*/
+
 /* Functions macros, constants, types and datas         */
 /* ---------------------------------------------------- */
 /* Functions macros */
@@ -74,58 +71,98 @@
 /* Private functions prototypes */
 /* ---------------------------- */
 
+
+
 /* Exported functions prototypes */
 /* ----------------------------- */
 
 /* Inline functions */
 /* ---------------- */
 
- void disableWatchdog(void) 
- {
-  	SWT.SR.R = 0x0000c520;     /* Write keys to clear soft lock bit */
-  	SWT.SR.R = 0x0000d928; 
-  	SWT.CR.R = 0x8000010A;     /* Clear watchdog enable (WEN) */
- }
+
 
 /* Private functions */
 /* ----------------- */
+
+
+
+/* Exported functions */
+/* ------------------ */
 /**************************************************************
- *  Name                 : 	main
- *  Description          :	main function
+ *  Name                 :	task_3P125MS
+ *  Description          :	call of the function every 3.125 milliseconds
  *  Parameters           :  void
- *  Return               :	int
+ *  Return               :	void
  *  Critical/explanation :  [No]
  **************************************************************/
- /*~~~~~~~ Main Code ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
- int main(void) 
+ void Sch_Task3P125MS(void)
  {
-	/*enbles and cofigures the memory allocation for the scheduler control block*/
-	MemAllocInit(&MemAllocConfig);
-	initModesAndClock();
-	/* Disable Watchdog */
-	disableWatchdog();
-	/*Initialize LEDs on TRK-MPC560xB board */
-	vfnGPIO_LED_Init();	
-	/*Initialize Interrupts */
-	INTC_InitINTCInterrupts();
-	/*Initialize Exception Handlers */
-	EXCEP_InitExceptionHandlers();
-    /* Enable External Interrupts*/
-    enableIrq();
-    
-    initGPIO();
-    BM_InitButtons();
-    LED_InitLeds();
-	
-	
-	SchM_Init(&cs_SchConfig);
-	SchM_Start();
-	
-	/* Infinite loop */
-	for (;;) 
-	{
-		/*Dummy line*/
-	}
+ 	
  }
-
- /*~~~~~~~ End of Main Code ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+ 
+ 
+ /**************************************************************
+ *  Name                 :	task_6P25MS
+ *  Description          :	call of the function every 6.25 milliseconds
+ *  Parameters           :  void
+ *  Return               :	void
+ *  Critical/explanation :  [No]
+ **************************************************************/
+ void Sch_Task6P25MS(void)
+ {
+ 	
+ }
+ 
+ 
+ /**************************************************************
+ *  Name                 :	task_12P5MS
+ *  Description          :	call of the function every 12.5 milliseconds
+ *  Parameters           :  void
+ *  Return               :	void
+ *  Critical/explanation :  [No]
+ **************************************************************/
+ void Sch_Task12P5MS(void)
+ {
+ 	LED_TOGGLE(LED1);/*for test purposes*/
+ }
+ 
+ 
+ /**************************************************************
+ *  Name                 :	task_25MS
+ *  Description          :	call of the function every 25 milliseconds
+ *  Parameters           :  void
+ *  Return               :	void
+ *  Critical/explanation :  [No]
+ **************************************************************/
+ void Sch_Task25MS(void)
+ {
+ 	LED_TOGGLE(LED2);
+ }
+ 
+ 
+ /**************************************************************
+ *  Name                 :	task_50MS
+ *  Description          :	call of the function every 50 milliseconds
+ *  Parameters           :  void
+ *  Return               :	void
+ *  Critical/explanation :  [No]
+ **************************************************************/
+ void Sch_Task50MS(void)
+ {
+ 	LED_TOGGLE(LED3);/*for test purposes*/
+ }
+ 
+ 
+ /**************************************************************
+ *  Name                 :	task_100MS
+ *  Description          :	call of the function every 100 milliseconds
+ *  Parameters           :  void
+ *  Return               :	void
+ *  Critical/explanation : 	[No]
+ **************************************************************/
+ void Sch_Task100MS(void)
+ {
+ 	LED_TOGGLE(LED4);
+ }
+ 
+ 
