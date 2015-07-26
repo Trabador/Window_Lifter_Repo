@@ -46,7 +46,12 @@
  *  Critical/explanation :    [yes / No]
  **************************************************************/
 int main(void) {
+int counter;
 	InitHW();
+	for(counter = 0; counter < 4 ; counter++){
+		SIU.GPDI[counter + 64].R = 1;
+		SIU.PCR[counter + 64].R = 0x0103;
+	}
 	MemAllocInit(&MemAllocConfig);
 	SchM_Init(&SchedulerConfig);
 	SchM_Start();
