@@ -31,6 +31,7 @@
 /* Includes */
 /* -------- */
 #include "GPIO.h"	/*for test purposes*/
+#include "MotorAPP.h"
 
 /* Functions macros, constants, types and datas         */
 /* ---------------------------------------------------- */
@@ -97,7 +98,7 @@
  **************************************************************/
  void Sch_Task3P125MS(void)
  {
- 	
+ 		DEB_DebounceDetection();	
  }
  
  
@@ -123,7 +124,7 @@
  **************************************************************/
  void Sch_Task12P5MS(void)
  {
- 	LED_TOGGLE(LED1);/*for test purposes*/
+ 		
  }
  
  
@@ -136,7 +137,7 @@
  **************************************************************/
  void Sch_Task25MS(void)
  {
- 	LED_TOGGLE(LED2);
+ 	
  }
  
  
@@ -149,7 +150,7 @@
  **************************************************************/
  void Sch_Task50MS(void)
  {
- 	LED_TOGGLE(LED3);/*for test purposes*/
+ 	
  }
  
  
@@ -162,7 +163,7 @@
  **************************************************************/
  void Sch_Task100MS(void)
  {
- 	LED_TOGGLE(LED4);
+ 	SM_StateMachine();
  }
  
  

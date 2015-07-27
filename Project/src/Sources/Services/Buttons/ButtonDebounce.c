@@ -1,12 +1,112 @@
+/*============================================================================*/
+/*                        SV C CE SOFTWARE GROUP                              */
+/*============================================================================*/
+/*                        OBJECT SPECIFICATION                                */
+/*============================================================================*
+* C Source:         %ButtonDebounce.c%
+* Instance:         1
+* %version:         1 %
+* %created_by:      Alexis Garcia%
+* %date_created:    28/07/2015%
+*=============================================================================*/
+/* DESCRIPTION : C source that contains the driver control for the button debounce         */
+/*============================================================================*/
+/* FUNCTION COMMENT : This file inlcudes the driver for the debounce in the window lifter
+						appplication 										  */
+/*                                                							  */
+/*                                                                            */
+/*============================================================================*/
+/*                               OBJECT HISTORY                               */
+/*============================================================================*/
+/*  REVISION |   DATE      |                               |      AUTHOR      */
+/*----------------------------------------------------------------------------*/
+/*  1.0      | 28/07/2015  |                               | Alexis Garcia     */
+/* Integration under Continuus CM                                             */
+/*============================================================================*/
+
+/* Includes */
+/* -------- */
 #include "ButtonDebounce.h"
 #include "ButtonManager.h"
 
+/* Functions macros, constants, types and datas         */
+/* ---------------------------------------------------- */
+/* Functions macros */
 
+/*==================================================*/ 
+/* Definition of constants                          */
+/*==================================================*/ 
+/* BYTE constants */
+
+
+/* WORD constants */
+
+
+/* LONG and STRUCTURE constants */
+
+
+
+/*======================================================*/ 
+/* Definition of RAM variables                          */
+/*======================================================*/ 
+/* BYTE RAM variables */
 T_UBYTE BtnCktDbn = 0;
 T_UBYTE BtnValidation = 0;
 
+
+/* WORD RAM variables */
+
+
+/* LONG and STRUCTURE RAM variables */
+
+
+/*======================================================*/ 
+/* close variable declaration sections                  */
+/*======================================================*/ 
+
+/* Private defines */
+
+
+/* Private functions prototypes */
+/* ---------------------------- */
 T_UBYTE DEB_GetButtons(void);
- 
+
+
+/* Exported functions prototypes */
+/* ----------------------------- */
+
+/* Inline functions */
+/* ---------------- */
+/**************************************************************
+ *  Name                 : inline_func	2
+ *  Description          :
+ *  Parameters           :  [Input, Output, Input / output]
+ *  Return               :
+ *  Critical/explanation :    [yes / No]
+ **************************************************************/
+
+
+/* Private functions */
+/* ----------------- */
+/**************************************************************
+ *  Name                 : private_func
+ *  Description          :
+ *  Parameters           :  [Input, Output, Input / output]
+ *  Return               :
+ *  Critical/explanation :    [yes / No]
+ **************************************************************/
+
+
+/* Exported functions */
+/* ------------------ */
+/**************************************************************
+ *  Name                 :	DEB_DebounceDetection
+ *  Description          :	Provides the functionality for the detection of the debounce of a button, if is pressed 
+ 							for more than 10 millisencods it consider a valid press
+ *  Parameters           :  void
+ *  Return               :	void
+ *  Critical/explanation :    [yes]
+ **************************************************************/
 void DEB_DebounceDetection (void)
 {
 	T_UBYTE BtnCktIn = 7;
@@ -31,7 +131,14 @@ void DEB_DebounceDetection (void)
 		BtnCktInPrev = BtnCktIn;
 	}
 }
-
+/**************************************************************
+ *  Name                 :	DEB_GetButtons
+ *  Description          :  Gets the direction of the register and process the data to return a value that contains 
+ 							the bits that represents the buttons presed in that time
+ *  Parameters           :  void
+ *  Return               :	T_UBYTE lub_ButtonValue
+ *  Critical/explanation :    [yes]
+ **************************************************************/
 
 T_UBYTE DEB_GetButtons(void)
 {

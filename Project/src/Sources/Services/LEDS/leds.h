@@ -1,8 +1,38 @@
+/*============================================================================*/
+/*                        SV C BC SOFTWARE GROUP                              */
+/*============================================================================*/
+/*                        OBJECT SPECIFICATION                                */
+/*============================================================================*
+* C Include:        %leds.c%
+* Instance:         1
+* %version:         1 %
+* %created_by:      Alexis Garcia%
+* %date_created:    21/07/15 %
+*=============================================================================*/
+/* DESCRIPTION : Header for the led driver                                         */
+/*============================================================================*/
+/* FUNCTION COMMENT : contains definition and externs variables for the led driver  */
+/*                                                                            */
+/*============================================================================*/
+/*                               OBJECT HISTORY                               */
+/*============================================================================*/
+/*  REVISION |   DATE      |                               |      AUTHOR      */
+/*----------------------------------------------------------------------------*/
+/*  1.0      | 21/07/2015  |                | Alexis Garcia   					*/
+/* Creation of the header                                             			*/
+/*============================================================================*/
+/* Includes */
+/* -------- */
 #ifndef _LEDS_H
 #define _LEDS_H
 
 #include "typedefs.h"
 #include "GPIO.h"
+
+/* Exported types and constants */
+/* ---------------------------- */
+
+/* Types definition */
 
 #define 	LED_G_OFF 	(SIU.GPDO[led_g].R = 1)
 #define 	LED_G_ON 	(SIU.GPDO[led_g].R = 0) 
@@ -37,7 +67,7 @@
 #define 	LEDS_ON(LED) 	(SIU.GPDO[LED].R = 0) 
 #define 	LEDS_OFF(LED) 	(SIU.GPDO[LED].R = 1)
 
-
+/* typedef */
 typedef enum 
 {
 	led_b,
@@ -55,7 +85,47 @@ typedef enum
 	
 }E_LedType;
 
-extern void LED_InitLeds(void);
+
+/*==================================================*/ 
+/* Declaration of exported constants                */
+/*==================================================*/ 
+/* BYTE constants */
+
+
+/* WORD constants */
+
+
+/* LONG and STRUCTURE constants */
+
 extern E_LedType led_list;
+
+/*======================================================*/ 
+/* Definition of RAM variables                          */
+/*======================================================*/ 
+/* BYTES */
+
+
+/* WORDS */
+
+
+/* LONGS and STRUCTURES */
+
+
+/*======================================================*/ 
+/* close variable declaration sections                  */
+/*======================================================*/ 
+
+/* Exported functions prototypes and macros */
+/* ---------------------------------------- */
+
+/* Functions prototypes */
+extern void LED_LedsStartup(void);
+extern void LED_InitLeds(void);
+
+/* Functions macros */
+
+
+/* Exported defines */
+
 
 #endif
