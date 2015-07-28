@@ -21,8 +21,15 @@
 /*  REVISION |   DATE      |                               |      AUTHOR      */
 /*----------------------------------------------------------------------------*/
 /*  1.0      | 21/07/2015  |                               | Alexis Garcia     */
-/* Integration under Continuus CM                                             */
+/* Creation of the module                                             */
 /*============================================================================*/
+/*============================================================================*/
+/*  REVISION |   DATE      |                               |      AUTHOR      */
+/*----------------------------------------------------------------------------*/
+/*  1.1      | 28/07/2015  |                               | Alexis Garcia    */
+/* Correction of some magic number                                            */
+/*============================================================================*/
+
 
 /* Includes */
 /* -------- */
@@ -112,11 +119,13 @@ void BM_GetCommandButton (void)
 		rub_timer ++;
 		if( (BtnCktDbn == AP_SIGNAL) && (re_Direction == GOING_UP) && re_Mode == AUTO)
 		{
-			rub_AntiPinch = 1;
+			if(re_State == UP)
+				rub_AntiPinch = 1;
 		}
 		else if(BtnCktDbn == AP_SIGNAL_MANUAL && re_Direction == GOING_UP && re_Mode == MANUAL)
 		{
-			rub_AntiPinch = 1;
+			if(re_State == UP)
+				rub_AntiPinch = 1;
 		}
 		else if(BtnCktDbn == UP_SIGNAL && !DOWN_PRESS)
 		{
@@ -130,13 +139,13 @@ void BM_GetCommandButton (void)
 			}
 			re_Direction = GOING_UP;
 		}
-		else if(BtnCktDbn == DOWN_SIGNAL && !UP_PRESS)
+		else if( BtnCktDbn == DOWN_SIGNAL && !UP_PRESS) 
 		{
 			if(rub_timer <= BM_Timer_Cfg)
 			{
 				re_Mode = AUTO;
 			}
-			else
+			else 
 			{
 				re_Mode = MANUAL;	
 			}
@@ -146,7 +155,11 @@ void BM_GetCommandButton (void)
 		{
 			re_Direction = INMOVIL;
 			BtnValidation = 0;
-		}	
+		}
+		else
+		{
+			BtnValidation = 0;	
+		}
 	}
 	else
 	{

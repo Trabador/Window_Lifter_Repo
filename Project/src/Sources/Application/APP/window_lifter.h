@@ -62,6 +62,9 @@ extern E_DirectionList 	re_Direction;
 /*-- Defines -----------------------------------------------------------------*/
 #define 	WL_timer_cfg		10
 #define		BLOCK_5S			125
+#define 	MAX_LED				1
+#define 	MIN_LED				10
+#define 	Enabled				1
 
 
 /*-- Function Prototypes -----------------------------------------------------*/

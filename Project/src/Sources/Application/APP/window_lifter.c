@@ -25,7 +25,9 @@
 /*----------------------------------------------------------------------------*/
 /*  2.0      | 27/07/2015  |                               | Alexis Garcia    */
 /* Modification of the module, movement of some functions to the drivers and
-	addition of comments according to the template		                       */
+	addition of comments according to the template		                       
+	2.1 	|  28/07/15    |                                | Alexis Garcia 
+	removed magic numbers in functions										  */
 /*============================================================================*/
 
 
@@ -39,9 +41,9 @@
 * Definition of module wide VARIABLEs 
 *****************************************************************************************************/
 /*global variable for the count of tej actual leds on*/
-T_UBYTE rub_led = 1;
+T_UBYTE rub_led = Enabled;
 
-T_UBYTE rub_LimitUp = 1;
+T_UBYTE rub_LimitUp = Enabled;
 T_UBYTE rub_LimitDown = 0;
 T_UBYTE rub_AntiPinch = 0;
 
@@ -108,7 +110,7 @@ void WL_UpState(void)
 {
 	lub_timer ++;
 	LED_G_OFF;
-	if( (UP_RELEASE == 1 && re_Mode == MANUAL) || (rub_LimitUp == 1))
+	if( (UP_RELEASE == Enabled && re_Mode == MANUAL) || (rub_LimitUp == Enabled))
 	{
 		re_Direction = INMOVIL;
 		re_State = IDLE;
@@ -126,10 +128,10 @@ void WL_UpState(void)
 				LEDS_ON(rub_led);
 				rub_led--;
 				rub_LimitDown = 0;
-				if(rub_led < 1)
+				if(rub_led < MAX_LED)
 				{
-					rub_led = 1;
-					rub_LimitUp = 1;
+					rub_led = MAX_LED;
+					rub_LimitUp = Enabled;
 				}
 			}
 			else
@@ -152,9 +154,9 @@ void WL_DownState(void)
 {
 	lub_timer ++;
 	LED_B_OFF;
-	if( (DOWN_RELEASE == 1 && re_Mode == MANUAL) || (rub_LimitDown == 1) )
+	if( (DOWN_RELEASE == Enabled && re_Mode == MANUAL) || (rub_LimitDown == Enabled) )
 	{
-		if(rub_AntiPinch == 1)
+		if(rub_AntiPinch == Enabled)
 		{
 			re_State = PROTECT;
 			lub_timer = 0;
@@ -176,10 +178,10 @@ void WL_DownState(void)
 			LEDS_OFF(rub_led);
 			rub_led++;
 			rub_LimitUp = 0;
-			if(rub_led > 10)
+			if(rub_led > MIN_LED)
 			{	
-				rub_led = 10;
-				rub_LimitDown = 1;
+				rub_led = MIN_LED;
+				rub_LimitDown = Enabled;
 			}	
 		}
 	}

@@ -20,8 +20,13 @@
 /*============================================================================*/
 /*  REVISION |   DATE      |                               |      AUTHOR      */
 /*----------------------------------------------------------------------------*/
-/*  1.0      | 28/07/2015  |                               | Alexis Garcia     */
-/* Integration under Continuus CM                                             */
+/*  1.0      | 24/07/2015  |                               | Alexis Garcia    */
+/* Creation Of The Module		                                              */
+/*  1.1      | 26/07/2015  |							   | Roberto Palos    */
+/* Creation of the function DEB_GetButtons				   					  */
+/*  1.2		 | 27/07/2015  |                               | Alexis Garcia	  */
+/* Adaptation of the functionDEB_GetButtons to work with function DEB_Debounce*/
+/* Detection.                                                                 */
 /*============================================================================*/
 
 /* Includes */
@@ -109,7 +114,7 @@ T_UBYTE DEB_GetButtons(void);
  **************************************************************/
 void DEB_DebounceDetection (void)
 {
-	T_UBYTE BtnCktIn = 7;
+	T_UBYTE BtnCktIn;
 	static BtnCktIn_count = 0;
 	static T_UBYTE BtnCktInPrev = 0;
 	
