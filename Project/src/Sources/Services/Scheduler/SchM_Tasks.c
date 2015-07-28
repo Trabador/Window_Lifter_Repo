@@ -101,7 +101,7 @@
  *  Return               :	void
  *  Critical/explanation :  [No]
  **************************************************************/
- void Sch_Task1P125MS(void)
+ void Sch_Task1P25MS(void)
  {
  	if(rub_AntiPinch == 0)
  	{
@@ -145,7 +145,7 @@
  **************************************************************/
  void Sch_Task10MS(void)
  {
- 	
+ 	BM_GetCommandButton();
  }
  
  
@@ -158,7 +158,7 @@
  **************************************************************/
  void Sch_Task20MS(void)
  {
- 	BM_GetCommandButton();		
+ 			
  }
  
  

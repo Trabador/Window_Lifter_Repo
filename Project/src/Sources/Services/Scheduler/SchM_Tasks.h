@@ -74,7 +74,7 @@
 /* ---------------------------------------- */
 
 /* Functions prototypes */
-extern void Sch_Task1P125MS(void);
+extern void Sch_Task1P25MS(void);
 extern void Sch_Task2P5MS(void);
 extern void Sch_Task5MS(void);
 extern void Sch_Task10MS(void);

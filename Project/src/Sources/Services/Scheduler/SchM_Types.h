@@ -46,7 +46,7 @@ typedef T_UBYTE rub_SchTaskOffsetType;
 
 typedef enum
 {
-	MASK_1P125MS = 1,
+	MASK_1P25MS = 1,
 	MASK_2P5MS =  3,
 	MASK_5MS =  7,
 	MASK_10MS =    15,
@@ -58,7 +58,7 @@ typedef enum
 typedef enum
 {
 	TASK_BKG,
-	TASK_1P125MS,
+	TASK_1P25MS,
 	TASK_2P5MS,
 	TASK_5MS,
 	TASK_10MS,

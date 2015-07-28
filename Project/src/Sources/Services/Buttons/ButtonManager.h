@@ -37,7 +37,7 @@
 #define 	PIN_BTN	  64
 #define 	BtnNumber 3
 
-#define 	BM_Timer_Cfg  25
+#define 	BM_Timer_Cfg  50
 
 #define 	UP_SIGNAL 	     	3
 #define 	DOWN_SIGNAL			5
