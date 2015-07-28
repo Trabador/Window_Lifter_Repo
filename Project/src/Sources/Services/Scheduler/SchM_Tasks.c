@@ -28,9 +28,15 @@
 /*  2.0      | 17/07/2015  | Correction of naming convention |Alexis Garcia     */
 /* 								                                              */
 /*============================================================================*/
+/*============================================================================*/
+/*  REVISION |   DATE      |                               |      AUTHOR      */
+/*----------------------------------------------------------------------------*/
+/*  2.1      | 27/07/2015  | Minor function name changes |Alexis Garcia     */
+/* 								                                              */
+/*============================================================================*/
 /* Includes */
 /* -------- */
-#include "GPIO.h"	/*for test purposes*/
+#include "window_lifter.h"
 
 /* Functions macros, constants, types and datas         */
 /* ---------------------------------------------------- */
@@ -95,9 +101,12 @@
  *  Return               :	void
  *  Critical/explanation :  [No]
  **************************************************************/
- void Sch_Task3P125MS(void)
+ void Sch_Task1P25MS(void)
  {
- 	
+ 	if(rub_AntiPinch == 0)
+ 	{
+ 		DEB_DebounceDetection();
+ 	}		
  }
  
  
@@ -108,7 +117,7 @@
  *  Return               :	void
  *  Critical/explanation :  [No]
  **************************************************************/
- void Sch_Task6P25MS(void)
+ void Sch_Task2P5MS(void)
  {
  	
  }
@@ -121,9 +130,9 @@
  *  Return               :	void
  *  Critical/explanation :  [No]
  **************************************************************/
- void Sch_Task12P5MS(void)
+ void Sch_Task5MS(void)
  {
- 	LED_TOGGLE(LED1);/*for test purposes*/
+ 	
  }
  
  
@@ -134,9 +143,9 @@
  *  Return               :	void
  *  Critical/explanation :  [No]
  **************************************************************/
- void Sch_Task25MS(void)
+ void Sch_Task10MS(void)
  {
- 	LED_TOGGLE(LED2);
+ 	BM_GetCommandButton();
  }
  
  
@@ -147,9 +156,9 @@
  *  Return               :	void
  *  Critical/explanation :  [No]
  **************************************************************/
- void Sch_Task50MS(void)
+ void Sch_Task20MS(void)
  {
- 	LED_TOGGLE(LED3);/*for test purposes*/
+ 			
  }
  
  
@@ -160,9 +169,9 @@
  *  Return               :	void
  *  Critical/explanation : 	[No]
  **************************************************************/
- void Sch_Task100MS(void)
+ void Sch_Task40MS(void)
  {
- 	LED_TOGGLE(LED4);
+ 	WL_StateMachine();		
  }
  
  

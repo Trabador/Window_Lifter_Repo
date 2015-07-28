@@ -3,117 +3,44 @@
 /*============================================================================*/
 /*                        OBJECT SPECIFICATION                                */
 /*============================================================================*
-* C Include:        %SchM_Types.h%
+* C Include:        %ButtonDebounce.c%
 * Instance:         1
 * %version:         1 %
 * %created_by:      Alexis Garcia%
-* %date_created:    13/07/2015 %
+* %date_created:    21/07/15 %
 *=============================================================================*/
-/* DESCRIPTION : 					                                          */
+/* DESCRIPTION : Header for the debounce driver                                         */
 /*============================================================================*/
-/* FUNCTION COMMENT : 													      */
-/* 																			  */
+/* FUNCTION COMMENT : contains definition and externs variables for the debounce driver  */
 /*                                                                            */
 /*============================================================================*/
 /*                               OBJECT HISTORY                               */
 /*============================================================================*/
 /*  REVISION |   DATE      |                               |      AUTHOR      */
 /*----------------------------------------------------------------------------*/
-/*  1.0      | 13/07/2015  | 				               |Alexis Garcia     */
-/* 								                                              */
+/*  1.0      | 21/07/2015  |                | Alexis Garcia   					*/
+/* Creation of the header                                             			*/
 /*============================================================================*/
-/*============================================================================*/
-/*  REVISION |   DATE      |                               |      AUTHOR      */
-/*----------------------------------------------------------------------------*/
-/*  2.0      | 17/07/2015  | Correction of naming convention |Alexis Garcia     */
-/* 								                                              */
-/*============================================================================*/
-#ifndef _SCHEDULER_TYPE_H
-#define _SCHEDULER_TYPE_H
+
+#ifndef DEB_H
+#define DEB_H
 
 /* Includes */
 /* -------- */
 #include "typedefs.h"
+#include "ButtonDebounce.h"
+#include "GPIO.h"
 
 /* Exported types and constants */
 /* ---------------------------- */
-
+extern T_UBYTE BtnCktDbn;
+extern T_UBYTE BtnValidation;
 /* Types definition */
+#define BttnDbncCount_Cfg 8
+
+#define PIN_DIRECTION (&SIU.GPDI[64].R)
 /* typedef */
-typedef void (*TaskFunctionPtrType) (void);
-typedef T_UBYTE rub_SchTaskOffsetType;
 
-
-typedef enum
-{
-	MASK_1P25MS = 1,
-	MASK_2P5MS =  3,
-	MASK_5MS =  7,
-	MASK_10MS =    15,
-	MASK_20MS =    31,
-	MASK_40MS =   63
-	
-}E_SchTaskMaskType;
-
-typedef enum
-{
-	TASK_BKG,
-	TASK_1P25MS,
-	TASK_2P5MS,
-	TASK_5MS,
-	TASK_10MS,
-	TASK_20MS,
-	TASK_40MS
-	
-}E_SchTaskIdType;
-
-typedef enum
-{
-	TASK_STATE_SUSPENDED,
-	TASK_STATE_READY,
-	TASK_STATE_RUNNING
-	
-}E_SchTaskStateType;
-
-typedef struct
-{
-	E_SchTaskStateType SchTaskState;
-	TaskFunctionPtrType	TaskFunctionControlPtr;
-	
-}S_SchTaskControlBlock;
-
-typedef struct
-{
-	rub_SchTaskOffsetType SchTaskOffset;
-	E_SchTaskMaskType SchTaskMask;
-	E_SchTaskIdType SchTaskId;
-	TaskFunctionPtrType TaskFunctionPtr;
-	
-}S_SchTaskTableType;
-
-typedef struct
-{
-	T_UBYTE SchNumberOfTasks;
-	const S_SchTaskTableType *SchTaskTable;
-}S_SchConfigType;
-
-typedef enum
-{
-	SCH_UNINIT,
-	SCH_INIT,
-	SCH_RUNNING,
-	SCH_OVERLOAD,
-	SCH_HALTED
-	
-}E_SchStateType;
-
-typedef struct
-{
-	T_UBYTE SchCounter;
-	E_SchTaskIdType SchTaskRunning;
-	E_SchStateType SchStatus;
-	
-}S_SchControlType;
 
 /*==================================================*/ 
 /* Declaration of exported constants                */
@@ -148,10 +75,11 @@ typedef struct
 /* ---------------------------------------- */
 
 /* Functions prototypes */
-
+extern void DEB_DebounceDetection (void);
 
 /* Functions macros */
 
 
 /* Exported defines */
+
 #endif

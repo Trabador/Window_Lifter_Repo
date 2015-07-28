@@ -3,41 +3,30 @@
 /*============================================================================*/
 /*                        OBJECT SPECIFICATION                                */
 /*============================================================================*
-* C Source:         %SchM_Cfg.c%
+* C Source:         %leds.c%
 * Instance:         1
 * %version:         1 %
-* %created_by:      Alexis Garcia %
-* %date_created:    13/07/2015%
+* %created_by:      Alexis Garcia%
+* %date_created:    21/07/2015%
 *=============================================================================*/
-/* DESCRIPTION : 					                                          */
+/* DESCRIPTION : C source that contains the driver control for leds           */
 /*============================================================================*/
-/* FUNCTION COMMENT : 														  */
-/* 								                                              */
+/* FUNCTION COMMENT : This file inlcudes the driver for the leds in the window lifter
+						appplication 										  */
+/*                                                							  */
 /*                                                                            */
 /*============================================================================*/
 /*                               OBJECT HISTORY                               */
 /*============================================================================*/
 /*  REVISION |   DATE      |                               |      AUTHOR      */
 /*----------------------------------------------------------------------------*/
-/*  1.0      | 13/07/2015  |                               |Alexis Garcia     */
-/* 								                                              */
+/*  1.0      | 21/07/2015  |                               | Alexis Garcia     */
+/* Integration under Continuus CM                                             */
 /*============================================================================*/
 
-
-/*============================================================================*/
-/*  REVISION |   DATE      |                               |      AUTHOR      */
-/*----------------------------------------------------------------------------*/
-/*  2.0      | 17/07/2015  | Correction of naming convention |Alexis Garcia     */
-/* 								                                              */
-/*============================================================================*/
 /* Includes */
 /* -------- */
-#include "SchM_Cfg.h"
-#include "SchM_Tasks.h"
-
-
-
-
+#include "leds.h"
 /* Functions macros, constants, types and datas         */
 /* ---------------------------------------------------- */
 /* Functions macros */
@@ -52,22 +41,7 @@
 
 
 /* LONG and STRUCTURE constants */
-const S_SchTaskTableType cas_SchTaskTableConfig [] =
-{
-	/*Offset, Mask, TaskID, Function Pointer*/
-	{0, MASK_1P25MS, TASK_1P25MS, &Sch_Task1P25MS},
-	{1, MASK_2P5MS,   TASK_2P5MS, &Sch_Task2P5MS},
-	{2, MASK_5MS,   TASK_5MS, &Sch_Task5MS},
-	{3, MASK_10MS,       TASK_10MS, &Sch_Task10MS},
-	{5, MASK_20MS,       TASK_20MS, &Sch_Task20MS},
-	{6, MASK_40MS,     TASK_40MS, &Sch_Task40MS}
-};
 
-const S_SchConfigType cs_SchConfig = 
-{
-	(sizeof(cas_SchTaskTableConfig)/sizeof(cas_SchTaskTableConfig[0])),
-	cas_SchTaskTableConfig	
-};
 
 
 /*======================================================*/ 
@@ -97,34 +71,59 @@ const S_SchConfigType cs_SchConfig =
 /* Exported functions prototypes */
 /* ----------------------------- */
 
-/* Inline functions */
-/* ---------------- */
-/**************************************************************
- *  Name                 : inline_func	2
- *  Description          :
- *  Parameters           :  [Input, Output, Input / output]
- *  Return               :
- *  Critical/explanation :    [yes / No]
- **************************************************************/
-
-
-/* Private functions */
-/* ----------------- */
-/**************************************************************
- *  Name                 : private_func
- *  Description          :
- *  Parameters           :  [Input, Output, Input / output]
- *  Return               :
- *  Critical/explanation :    [yes / No]
- **************************************************************/
-
-
 /* Exported functions */
 /* ------------------ */
+
 /**************************************************************
- *  Name                 :	export_func
- *  Description          :
- *  Parameters           :  [Input, Output, Input / output]
- *  Return               :
- *  Critical/explanation :    [yes / No]
+ *  Name                 :	LED_LedsStartup
+ *  Description          :	sets the led bar on default (closed) and the direction leds in off
+ *  Parameters           :  void
+ *  Return               :	void
+ *  Critical/explanation :    no
  **************************************************************/
+void LED_LedsStartup(void)
+{
+	T_UBYTE led;
+	for(led = 1;led <= 10; led++)
+	{
+		LEDS_ON(led);
+			
+	}
+	LED_B_OFF;
+	LED_G_OFF;
+}
+
+/**************************************************************
+ *  Name                 :	LED_InitLeds
+ *  Description          :	sets the ports for the leds in input mode and in off for default
+ *  Parameters           :  void
+ *  Return               : void
+ *  Critical/explanation :    no
+ **************************************************************/
+void LED_InitLeds(void)
+{
+	SIU.GPDO[led_g].R = 1;
+	SIU.PCR[led_g].R = 0x0200;
+	SIU.GPDO[led1].R = 1;
+	SIU.PCR[led1].R = 0x0200;
+	SIU.GPDO[led2].R = 1;
+	SIU.PCR[led2].R = 0x0200;
+	SIU.GPDO[led3].R = 1;
+	SIU.PCR[led3].R = 0x0200;
+	SIU.GPDO[led4].R = 1;
+	SIU.PCR[led4].R = 0x0200;
+	SIU.GPDO[led5].R = 1;
+	SIU.PCR[led5].R = 0x0200;
+	SIU.GPDO[led6].R = 1;
+	SIU.PCR[led6].R = 0x0200;
+	SIU.GPDO[led7].R = 1;
+	SIU.PCR[led7].R = 0x0200;
+	SIU.GPDO[led8].R = 1;
+	SIU.PCR[led8].R = 0x0200;
+	SIU.GPDO[led9].R = 1;
+	SIU.PCR[led9].R = 0x0200;
+	SIU.GPDO[led10].R = 1;
+	SIU.PCR[led10].R = 0x0200;
+	SIU.GPDO[led_b].R = 1;
+	SIU.PCR[led_b].R = 0x0200;
+}

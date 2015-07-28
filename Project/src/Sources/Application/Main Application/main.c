@@ -19,21 +19,29 @@
 /*============================================================================*/
 /*  REVISION |   DATE      |                               |      AUTHOR      */
 /*----------------------------------------------------------------------------*/
-/*  1.0      | 13/07/2015  |                               | Alexis Garcia    */
+/*  1.0      | 13/07/2015  | Creation of module            | Alexis Garcia    */
 /* 									                                          */
 /*============================================================================*/
 /*============================================================================*/
 /*  REVISION |   DATE      |                               |      AUTHOR      */
 /*----------------------------------------------------------------------------*/
-/*  2.0      | 17/07/2015  | Correction of naming convention |Alexis Garcia     */
+/*  2.0      | 17/07/2015  | Correction of naming convention |Alexis Garcia   */
 /* 								                                              */
 /*============================================================================*/
+/*============================================================================*/
+/*  REVISION |   DATE      |                               |      AUTHOR      */
+/*----------------------------------------------------------------------------*/
+/*  3.0      | 24/07/2015  | integration of the wl app     |Alexis Garcia   */
+/* 								                                              */
+/*============================================================================*/
+
 /* Includes */
 /* -------- */
 #include    "MCU_derivative.h"
 #include    "GPIO.h"
 #include    "SchM.h"
 #include 	"MemAlloc_Cfg.h"
+#include 	"window_lifter.h"
 /* Functions macros, constants, types and datas         */
 /* ---------------------------------------------------- */
 /* Functions macros */
@@ -111,7 +119,10 @@
 	EXCEP_InitExceptionHandlers();
     /* Enable External Interrupts*/
     enableIrq();
-	
+    
+    BM_InitButtons();
+    LED_InitLeds();
+	LED_LedsStartup();
 	
 	SchM_Init(&cs_SchConfig);
 	SchM_Start();
@@ -124,9 +135,3 @@
  }
 
  /*~~~~~~~ End of Main Code ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-
-
-
-/* Exported functions */
-/* ------------------ */

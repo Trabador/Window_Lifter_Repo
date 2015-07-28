@@ -3,40 +3,38 @@
 /*============================================================================*/
 /*                        OBJECT SPECIFICATION                                */
 /*============================================================================*
-* C Source:         %SchM_Cfg.c%
+* C Source:         %ButtonManager.c%
 * Instance:         1
 * %version:         1 %
-* %created_by:      Alexis Garcia %
-* %date_created:    13/07/2015%
+* %created_by:      Alexis Garcia%
+* %date_created:    21/07/2015%
 *=============================================================================*/
-/* DESCRIPTION : 					                                          */
+/* DESCRIPTION : C source that contains the driver control for buttons           */
 /*============================================================================*/
-/* FUNCTION COMMENT : 														  */
-/* 								                                              */
+/* FUNCTION COMMENT : This file inlcudes the driver for the buttons in the window lifter
+						appplication 										  */
+/*                                                							  */
 /*                                                                            */
 /*============================================================================*/
 /*                               OBJECT HISTORY                               */
 /*============================================================================*/
 /*  REVISION |   DATE      |                               |      AUTHOR      */
 /*----------------------------------------------------------------------------*/
-/*  1.0      | 13/07/2015  |                               |Alexis Garcia     */
-/* 								                                              */
+/*  1.0      | 21/07/2015  |                               | Alexis Garcia     */
+/* Creation of the module                                             */
 /*============================================================================*/
-
-
 /*============================================================================*/
 /*  REVISION |   DATE      |                               |      AUTHOR      */
 /*----------------------------------------------------------------------------*/
-/*  2.0      | 17/07/2015  | Correction of naming convention |Alexis Garcia     */
-/* 								                                              */
+/*  1.1      | 28/07/2015  |                               | Alexis Garcia    */
+/* Correction of some magic number                                            */
 /*============================================================================*/
+
+
 /* Includes */
 /* -------- */
-#include "SchM_Cfg.h"
-#include "SchM_Tasks.h"
-
-
-
+#include "ButtonManager.h"
+#include "window_lifter.h"
 
 /* Functions macros, constants, types and datas         */
 /* ---------------------------------------------------- */
@@ -52,22 +50,7 @@
 
 
 /* LONG and STRUCTURE constants */
-const S_SchTaskTableType cas_SchTaskTableConfig [] =
-{
-	/*Offset, Mask, TaskID, Function Pointer*/
-	{0, MASK_1P25MS, TASK_1P25MS, &Sch_Task1P25MS},
-	{1, MASK_2P5MS,   TASK_2P5MS, &Sch_Task2P5MS},
-	{2, MASK_5MS,   TASK_5MS, &Sch_Task5MS},
-	{3, MASK_10MS,       TASK_10MS, &Sch_Task10MS},
-	{5, MASK_20MS,       TASK_20MS, &Sch_Task20MS},
-	{6, MASK_40MS,     TASK_40MS, &Sch_Task40MS}
-};
 
-const S_SchConfigType cs_SchConfig = 
-{
-	(sizeof(cas_SchTaskTableConfig)/sizeof(cas_SchTaskTableConfig[0])),
-	cas_SchTaskTableConfig	
-};
 
 
 /*======================================================*/ 
@@ -75,7 +58,7 @@ const S_SchConfigType cs_SchConfig =
 /*======================================================*/ 
 /* BYTE RAM variables */
 
-
+T_UWORD rub_timer = 0;
 /* WORD RAM variables */
 
 
@@ -122,9 +105,81 @@ const S_SchConfigType cs_SchConfig =
 /* Exported functions */
 /* ------------------ */
 /**************************************************************
- *  Name                 :	export_func
- *  Description          :
- *  Parameters           :  [Input, Output, Input / output]
- *  Return               :
- *  Critical/explanation :    [yes / No]
+ *  Name                 :	BM_GetCommandButton
+ *  Description          :	Provides a function that filters the signal coming from the debounce
+ 							and determines the command functionality for the wl app, also determines the mode of function (auto/manual)
+ *  Parameters           :  void
+ *  Return               :	void
+ *  Critical/explanation :    [yes]
  **************************************************************/
+void BM_GetCommandButton (void)
+{
+	if(BtnValidation == 1)
+	{
+		rub_timer ++;
+		if( (BtnCktDbn == AP_SIGNAL) && (re_Direction == GOING_UP) && re_Mode == AUTO)
+		{
+			if(re_State == UP)
+				rub_AntiPinch = 1;
+		}
+		else if(BtnCktDbn == AP_SIGNAL_MANUAL && re_Direction == GOING_UP && re_Mode == MANUAL)
+		{
+			if(re_State == UP)
+				rub_AntiPinch = 1;
+		}
+		else if(BtnCktDbn == UP_SIGNAL && !DOWN_PRESS)
+		{
+			if(rub_timer <= BM_Timer_Cfg)
+			{
+				re_Mode = AUTO;
+			}
+			else
+			{
+				re_Mode = MANUAL;	
+			}
+			re_Direction = GOING_UP;
+		}
+		else if( BtnCktDbn == DOWN_SIGNAL && !UP_PRESS) 
+		{
+			if(rub_timer <= BM_Timer_Cfg)
+			{
+				re_Mode = AUTO;
+			}
+			else 
+			{
+				re_Mode = MANUAL;	
+			}
+			re_Direction = GOING_DOWN;
+		}
+		else if(BtnCktDbn == NO_PRESS)
+		{
+			re_Direction = INMOVIL;
+			BtnValidation = 0;
+		}
+		else
+		{
+			BtnValidation = 0;	
+		}
+	}
+	else
+	{
+		rub_timer = 0;
+	}
+}
+
+/**************************************************************
+ *  Name                 :	BM_InitButtons
+ *  Description          :	Provides the function of initialice certain number of buttons in input mode 
+ *  Parameters           :  void
+ *  Return               :  void
+ *  Critical/explanation :    [no]
+ **************************************************************/
+void BM_InitButtons(void)
+{
+	T_UBYTE lub_iterator;
+	for(lub_iterator = 0; lub_iterator < BtnNumber ; lub_iterator++)
+	{
+		SIU.GPDI[lub_iterator + PIN_BTN].R = 1;
+		SIU.PCR[lub_iterator + PIN_BTN].R = 0x0103;
+	}
+}

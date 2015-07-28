@@ -74,12 +74,12 @@
 /* ---------------------------------------- */
 
 /* Functions prototypes */
-extern void Sch_Task3P125MS(void);
-extern void Sch_Task6P25MS(void);
-extern void Sch_Task12P5MS(void);
-extern void Sch_Task25MS(void);
-extern void Sch_Task50MS(void);
-extern void Sch_Task100MS(void);
+extern void Sch_Task1P25MS(void);
+extern void Sch_Task2P5MS(void);
+extern void Sch_Task5MS(void);
+extern void Sch_Task10MS(void);
+extern void Sch_Task20MS(void);
+extern void Sch_Task40MS(void);
 
 /* Functions macros */
 

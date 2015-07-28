@@ -3,117 +3,88 @@
 /*============================================================================*/
 /*                        OBJECT SPECIFICATION                                */
 /*============================================================================*
-* C Include:        %SchM_Types.h%
+* C Include:        %leds.c%
 * Instance:         1
 * %version:         1 %
 * %created_by:      Alexis Garcia%
-* %date_created:    13/07/2015 %
+* %date_created:    21/07/15 %
 *=============================================================================*/
-/* DESCRIPTION : 					                                          */
+/* DESCRIPTION : Header for the led driver                                         */
 /*============================================================================*/
-/* FUNCTION COMMENT : 													      */
-/* 																			  */
+/* FUNCTION COMMENT : contains definition and externs variables for the led driver  */
 /*                                                                            */
 /*============================================================================*/
 /*                               OBJECT HISTORY                               */
 /*============================================================================*/
 /*  REVISION |   DATE      |                               |      AUTHOR      */
 /*----------------------------------------------------------------------------*/
-/*  1.0      | 13/07/2015  | 				               |Alexis Garcia     */
-/* 								                                              */
+/*  1.0      | 21/07/2015  |                | Alexis Garcia   					*/
+/* Creation of the header                                             			*/
 /*============================================================================*/
-/*============================================================================*/
-/*  REVISION |   DATE      |                               |      AUTHOR      */
-/*----------------------------------------------------------------------------*/
-/*  2.0      | 17/07/2015  | Correction of naming convention |Alexis Garcia     */
-/* 								                                              */
-/*============================================================================*/
-#ifndef _SCHEDULER_TYPE_H
-#define _SCHEDULER_TYPE_H
-
 /* Includes */
 /* -------- */
+#ifndef _LEDS_H
+#define _LEDS_H
+
 #include "typedefs.h"
+#include "GPIO.h"
 
 /* Exported types and constants */
 /* ---------------------------- */
 
 /* Types definition */
+
+#define 	LED_G_OFF 	(SIU.GPDO[led_g].R = 1)
+#define 	LED_G_ON 	(SIU.GPDO[led_g].R = 0) 
+#define 	LED1_OFF 	(SIU.GPDO[led1].R = 1 )
+#define 	LED1_ON		(SIU.GPDO[led1].R = 0)
+#define 	LED2_OFF 	(SIU.GPDO[led2].R = 1 )
+#define 	LED2_ON		(SIU.GPDO[led2].R = 0 )
+#define 	LED3_OFF 	(SIU.GPDO[led3].R = 1 )
+#define 	LED3_ON		(SIU.GPDO[led3].R = 0 )
+#define 	LED4_OFF 	(SIU.GPDO[led4].R = 1 )
+#define 	LED4_ON		(SIU.GPDO[led4].R = 0 )
+#define 	LED5_OFF 	(SIU.GPDO[led5].R = 1 )
+#define 	LED5_ON		(SIU.GPDO[led5].R = 0 )
+#define 	LED6_OFF 	(SIU.GPDO[led6].R = 1 )
+#define 	LED6_ON		(SIU.GPDO[led6].R = 0 )
+#define 	LED7_OFF 	(SIU.GPDO[led7].R = 1 )
+#define 	LED7_ON		(SIU.GPDO[led7].R = 0 )
+#define 	LED8_OFF 	(SIU.GPDO[led8].R = 1 )
+#define 	LED8_ON		(SIU.GPDO[led8].R = 0 )
+#define 	LED9_OFF 	(SIU.GPDO[led9].R = 1 )
+#define 	LED9_ON		(SIU.GPDO[led9].R = 0 )
+#define 	LED10_OFF 	(SIU.GPDO[led10].R = 1 )
+#define 	LED10_ON	(SIU.GPDO[led10].R = 0 )
+#define 	LED_B_OFF 	(SIU.GPDO[led_b].R = 1 )
+#define 	LED_B_ON 	(SIU.GPDO[led_b].R = 0 )
+
+#define 	max_Led_Number		10
+#define 	index_Handler		11
+#define 	min_Led_Number 		0
+#define 	one_Led				1
+
+#define 	LEDS_ON(LED) 	(SIU.GPDO[LED].R = 0) 
+#define 	LEDS_OFF(LED) 	(SIU.GPDO[LED].R = 1)
+
 /* typedef */
-typedef void (*TaskFunctionPtrType) (void);
-typedef T_UBYTE rub_SchTaskOffsetType;
-
-
-typedef enum
+typedef enum 
 {
-	MASK_1P25MS = 1,
-	MASK_2P5MS =  3,
-	MASK_5MS =  7,
-	MASK_10MS =    15,
-	MASK_20MS =    31,
-	MASK_40MS =   63
+	led_b,
+	led1,
+	led2,
+	led3,
+	led4,
+	led5,
+	led6,
+	led7,
+	led8,
+	led9,
+	led10,
+	led_g
 	
-}E_SchTaskMaskType;
+}E_LedType;
 
-typedef enum
-{
-	TASK_BKG,
-	TASK_1P25MS,
-	TASK_2P5MS,
-	TASK_5MS,
-	TASK_10MS,
-	TASK_20MS,
-	TASK_40MS
-	
-}E_SchTaskIdType;
-
-typedef enum
-{
-	TASK_STATE_SUSPENDED,
-	TASK_STATE_READY,
-	TASK_STATE_RUNNING
-	
-}E_SchTaskStateType;
-
-typedef struct
-{
-	E_SchTaskStateType SchTaskState;
-	TaskFunctionPtrType	TaskFunctionControlPtr;
-	
-}S_SchTaskControlBlock;
-
-typedef struct
-{
-	rub_SchTaskOffsetType SchTaskOffset;
-	E_SchTaskMaskType SchTaskMask;
-	E_SchTaskIdType SchTaskId;
-	TaskFunctionPtrType TaskFunctionPtr;
-	
-}S_SchTaskTableType;
-
-typedef struct
-{
-	T_UBYTE SchNumberOfTasks;
-	const S_SchTaskTableType *SchTaskTable;
-}S_SchConfigType;
-
-typedef enum
-{
-	SCH_UNINIT,
-	SCH_INIT,
-	SCH_RUNNING,
-	SCH_OVERLOAD,
-	SCH_HALTED
-	
-}E_SchStateType;
-
-typedef struct
-{
-	T_UBYTE SchCounter;
-	E_SchTaskIdType SchTaskRunning;
-	E_SchStateType SchStatus;
-	
-}S_SchControlType;
 
 /*==================================================*/ 
 /* Declaration of exported constants                */
@@ -126,7 +97,7 @@ typedef struct
 
 /* LONG and STRUCTURE constants */
 
-
+extern E_LedType led_list;
 
 /*======================================================*/ 
 /* Definition of RAM variables                          */
@@ -148,10 +119,13 @@ typedef struct
 /* ---------------------------------------- */
 
 /* Functions prototypes */
-
+extern void LED_LedsStartup(void);
+extern void LED_InitLeds(void);
 
 /* Functions macros */
 
 
 /* Exported defines */
+
+
 #endif
